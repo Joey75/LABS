@@ -295,14 +295,26 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
 		aoa_mean = aoa_mean / num_cluster_points;
 		tof_mean = tof_mean / num_cluster_points;
 		cluster_text = sprintf('Size: %d', num_cluster_points);
-		text(aoa_mean + 5, tof_mean, cluster_text)
+		text(aoa_mean + 5, tof_mean, cluster_text);
 		drawnow
-	end
-
-	[ellipse_x, ellipse_y] = compute_ellipse(...
-			clusters{max_likelihood_index}(:, 1) * aoa_max, ...
-			clusters{max_likelihood_index}(:, 2));
-	plot(ellipse_x, ellipse_y, 'c-', 'LineWidth', 3)
+    end
+    
+    % plot cycle for top 5 cluster
+    rank_index=0;
+    for jj = 1:size(top_likelihood_indices, 1)
+		if top_likelihood_indices(jj, 1) ~= -1
+            top_index=top_likelihood_indices(jj, 1);
+			[ellipse_x, ellipse_y, centroid_x, centroid_y] = compute_ellipse(...
+			clusters{top_index}(:, 1) * aoa_max, ...
+			clusters{top_index}(:, 2));
+            rank_index=rank_index+1;
+            rank_text=sprintf('Rank: %d',rank_index);
+            plot(ellipse_x, ellipse_y, 'c-', 'LineWidth', 3);
+            text(ellipse_x(1,size(ellipse_x,2)*3/4), ellipse_y(1,size(ellipse_y,2)*3/4), rank_text);
+            drawnow;
+		end
+    end
+    
 	xlabel('Angle of Arrival (AoA)')
 	ylabel('(Normalized) Time of Flight (ToF)')
 	title('Angle of Arrival vs. (Normalized) Time of Flight')
@@ -323,7 +335,7 @@ end
 % Return:
 % ellipse_x -- the x coordinates of the enclosing ellipse
 % ellipse_y -- the y coordinates of the enclosing ellipse
-function [ellipse_x, ellipse_y] = compute_ellipse(x, y)
+function [ellipse_x, ellipse_y, centroid_x, centroid_y] = compute_ellipse(x, y)
     % Buffer room for each dimension
     marker_adjustment_quantity_x = 4;
     marker_adjustment_quantity_y = 0.05;

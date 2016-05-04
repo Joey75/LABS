@@ -304,7 +304,7 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
     for jj = 1:size(top_likelihood_indices, 1)
 		if top_likelihood_indices(jj, 1) ~= -1
             top_index=top_likelihood_indices(jj, 1);
-			[ellipse_x, ellipse_y, centroid_x, centroid_y] = compute_ellipse(...
+			[ellipse_x, ellipse_y] = compute_ellipse(...
 			clusters{top_index}(:, 1) * aoa_max, ...
 			clusters{top_index}(:, 2));
             rank_index=rank_index+1;
@@ -335,7 +335,7 @@ end
 % Return:
 % ellipse_x -- the x coordinates of the enclosing ellipse
 % ellipse_y -- the y coordinates of the enclosing ellipse
-function [ellipse_x, ellipse_y, centroid_x, centroid_y] = compute_ellipse(x, y)
+function [ellipse_x, ellipse_y] = compute_ellipse(x, y)
     % Buffer room for each dimension
     marker_adjustment_quantity_x = 4;
     marker_adjustment_quantity_y = 0.05;

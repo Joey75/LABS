@@ -6,7 +6,7 @@ function output_top_aoas = run_spotfi(filepath)
     sub_freq_delta = (40 * 10^6) / 30;
 	
 	csi_trace=readfile(filepath);
-	num_packets = length(csi_trace);
+	num_packets = floor(length(csi_trace)/8);
 	sampled_csi_trace = csi_sampling(csi_trace, num_packets, 1, length(csi_trace));
 	[aoa_packet_data, tof_packet_data] = run_music(sampled_csi_trace, frequency, sub_freq_delta, antenna_distance);
 	[output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_data, num_packets);

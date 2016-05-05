@@ -230,6 +230,10 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
                     && jj == size(top_likelihood_indices, 1)
                 top_likelihood_indices(jj + 1, 1) = ii;
                 break;
+            % TODO: Make sure I want to keep this
+            elseif jj == size(top_likelihood_indices, 1) 
+                top_likelihood_indices(jj + 1, 1) = ii;
+                break;
             end
         end
     end
@@ -308,7 +312,7 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
 			clusters{top_index}(:, 1) * aoa_max, ...
 			clusters{top_index}(:, 2));
             rank_index=rank_index+1;
-            rank_text=sprintf('Rank: %d',rank_index);
+            rank_text=sprintf('Rank: %d, likelihood: %g',rank_index,likelihood(top_index, 1));
             plot(ellipse_x, ellipse_y, 'c-', 'LineWidth', 3);
             text(ellipse_x(1,size(ellipse_x,2)*3/4), ellipse_y(1,size(ellipse_y,2)*3/4), rank_text);
             drawnow;

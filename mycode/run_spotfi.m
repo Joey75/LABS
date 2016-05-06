@@ -4,9 +4,10 @@ function output_top_aoas = run_spotfi(filepath)
     % frequency = 5.785 * 10^9;
     frequency = 5.32 * 10^9;
     sub_freq_delta = (40 * 10^6) / 30;
+    %sub_freq_delta = 40 * 10^6;
 	
 	csi_trace=readfile(filepath);
-	num_packets = floor(length(csi_trace)/8);
+	num_packets = floor(length(csi_trace)/10);
 	sampled_csi_trace = csi_sampling(csi_trace, num_packets, 1, length(csi_trace));
 	[aoa_packet_data, tof_packet_data] = run_music(sampled_csi_trace, frequency, sub_freq_delta, antenna_distance);
 	[output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_data, num_packets);

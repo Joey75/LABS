@@ -8,9 +8,10 @@ function [csi_matrix, phase_matrix] = spotfi_algorithm_1(csi_matrix, delta_f, pa
         packet_one_phase_matrix = phase_matrix;
     end
 
-    fit_X(1:30, 1) = 1:1:30;
-    fit_X(31:60, 1) = 1:1:30;
-    fit_X(61:90, 1) = 1:1:30;
+    fit_X(1:30, 1) = 0:1:29;
+    fit_X(31:60, 1) = 0:1:29;
+    fit_X(61:90, 1) = 0:1:29;
+    fit_X = fit_X * 2 * pi * delta_f;
     fit_Y = zeros(90, 1);
     for i = 1:size(phase_matrix, 1)
         for j = 1:size(phase_matrix, 2)
@@ -25,7 +26,8 @@ function [csi_matrix, phase_matrix] = spotfi_algorithm_1(csi_matrix, delta_f, pa
     for m = 1:size(phase_matrix, 1)
         for n = 1:size(phase_matrix, 2)
             % Subtract the phase added from sampling time offset (STO)
-            phase_matrix(m, n) = packet_one_phase_matrix(m, n) + (2 * pi * delta_f * (n - 1) * tau);
+            phase_matrix(m, n) = packet_one_phase_matrix(m, n) - (2 * pi * delta_f * (n - 1) * tau);
+            %phase_matrix(m, n) = packet_one_phase_matrix(m, n) - (n - 1) * tau;
         end
     end
     

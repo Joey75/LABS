@@ -14,12 +14,19 @@ function plot_phase_beforeSanitization(csi_trace,packet1,packet2)
     ang2=angle(csi2);
     unwrapAng1=unwrap(ang1,pi,2);
     unwrapAng2=unwrap(ang2,pi,2);
+    figure('Name', 'Unmodified CSI Phase', 'NumberTitle', 'off')
     hold on;
-    plot(unwrapAng1(1,:),'r');
-    plot(unwrapAng1(2,:),'g');
-    plot(unwrapAng1(3,:),'b');
-    plot(unwrapAng2(1,:),'--r');
-    plot(unwrapAng2(2,:),'--g');
-    plot(unwrapAng2(3,:),'--b');
+    plot(unwrapAng1(1,:),'--r');
+    plot(unwrapAng1(2,:),'--g');
+    plot(unwrapAng1(3,:),'--b');
+    plot(unwrapAng2(1,:),'^r');
+    plot(unwrapAng2(2,:),'^g');
+    plot(unwrapAng2(3,:),'^b');
+    xlabel('Subcarrier Index')
+    ylabel('Unwrapped CSI Phase')
+    title('Unmodified CSI Phase')
+    legend('Packet 1, Antenna 1', 'Packet 1, Antenna 2', 'Packet 1, Antenna 3', ...
+            'Packet 2, Antenna 1', 'Packet 2, Antenna 2', 'Packet 2, Antenna 3')
+    grid on
     hold off;
 end

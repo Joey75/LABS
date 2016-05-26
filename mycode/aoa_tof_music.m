@@ -10,16 +10,8 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music(x, ...
     % Find the eigenvalues and eigenvectors of the covariance matrix
     [eigenvectors, eigenvalue_matrix] = eig(R);
     % Find max eigenvalue for normalization
-    max_eigenvalue = -1111;
-    for ii = 1:size(eigenvalue_matrix, 1)
-        if eigenvalue_matrix(ii, ii) > max_eigenvalue
-            max_eigenvalue = eigenvalue_matrix(ii, ii);
-        end
-    end
-	
-    for ii = 1:size(eigenvalue_matrix, 1)
-        eigenvalue_matrix(ii, ii) = eigenvalue_matrix(ii, ii) / max_eigenvalue;
-    end
+    max_eigenvalue = max(diag(eigenvalue_matrix));
+    eigenvalue_matrix = eigenvalue_matrix / max_eigenvalue;
     
     % Find the largest decrease ratio that occurs between the last 10 elements (largest 10 elements)
     % and is not the first decrease (from the largest eigenvalue to the next largest)
@@ -59,14 +51,6 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music(x, ...
                     frequency, sub_freq_delta, antenna_distance);
             PP = steering_vector' * (eigenvectors * eigenvectors') * steering_vector;
             Pmusic(ii, jj) = abs(1 /  PP);
-        end
-    end
-
-    % Convert to decibels
-    % ToF loop
-    for jj = 1:size(Pmusic, 2)
-        % AoA loop
-        for ii = 1:size(Pmusic, 1)
             Pmusic(ii, jj) = 10 * log10(Pmusic(ii, jj));% / max(Pmusic(:, jj))); 
             Pmusic(ii, jj) = abs(Pmusic(ii, jj));
         end

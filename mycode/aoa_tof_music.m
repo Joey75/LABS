@@ -77,27 +77,16 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music(x, ...
     % Find AoA peaks
     [~, aoa_peak_indices] = findpeaks(Pmusic(:, 1));
     estimated_aoas = theta(aoa_peak_indices);
-
-% 	% Theta (AoA) & Tau (ToF) 3D Plot
-% 	figure('Name', 'Selective AoA & ToF MUSIC Peaks, with only peaked AoAs', 'NumberTitle', 'off')
-% 	mesh(tau, estimated_aoas, Pmusic(aoa_peak_indices, :))
-% 	xlabel('Time of Flight')
-% 	ylabel('Angle of Arrival in degrees')
-% 	zlabel('Spectrum Peaks')
-% 	title('AoA and ToF Estimation from Modified MUSIC Algorithm')
-% 	grid on
     
 % 	% Tau (ToF)
-% 	for ii = 1:1%length(estimated_aoas)
-% 		figure_name_string = sprintf('ToF Estimation as a Function of Tau w/ AoA: %f', ...
-% 				estimated_aoas(ii));
-% 		figure('Name', figure_name_string, 'NumberTitle', 'off')
-% 		plot(tau, Pmusic(ii, :), '-k')
-% 		xlabel('Time of Flight \tau / degree')
-% 		ylabel('Spectrum function P(\theta, \tau)  / dB')
-% 		title(figure_name_string)
-% 		grid on
-% 	end
+%     figure_name_string = sprintf('ToF Estimation as a Function of Tau w/ AoA: %f', ...
+%             estimated_aoas(1));
+%     figure('Name', figure_name_string, 'NumberTitle', 'off')
+%     plot(tau, Pmusic(1, :), '-k')
+%     xlabel('Time of Flight \tau / degree')
+%     ylabel('Spectrum function P(\theta, \tau)  / dB')
+%     title(figure_name_string)
+%     grid on
     
     % Find ToF peaks
     time_peak_indices = zeros(length(aoa_peak_indices), length(tau));

@@ -1,7 +1,7 @@
 function csi_trace = readfile(filepath)
 	path('../linux-80211n-csitool-supplementary/matlab', path);
 	temp = read_bf_file(filepath);
-    flag=cellfun(@isempty,temp)
+    flag=cellfun(@isempty,temp);
     k=1;
     for i=1:size(temp,1)
         if flag(i,1)==0

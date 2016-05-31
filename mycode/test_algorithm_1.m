@@ -2,9 +2,9 @@ function test_algorithm_1(data_file)
     fprintf('Testing Algorithm 1\n')
     % Read data file in
     fprintf('Running on data file: %s\n', data_file)
-    csi_trace = read_bf_file(data_file);
+    csi_trace = readfile(data_file);
     % Extract CSI information for each packet
-    fprintf('Have CSI for %d packets\n', length(csi_trace))
+    fprintf('Have CSI for %d packets\n', length(csi_trace));
 
     % Get CSI for the first packet
     csi_entry_1 = csi_trace{1};

@@ -65,8 +65,8 @@ function test_algorithm_1(data_file)
     xlabel('Subcarrier Index')
     ylabel('Modified Unwrapped CSI Phase')
     title('Modified CSI Phase')
-    legend('Antenna 1, Packet 1', 'Antenna 2, Packet 1', 'Antenna 3, Packet 1', ...
-            'Antenna 1, Packet 2', 'Antenna 2, Packet 2', 'Antenna 3, Packet 2')
+    legend('Packet 1, Antenna 1', 'Packet 1, Antenna 2', 'Packet 1, Antenna 3', ...
+            'Packet 2, Antenna 1', 'Packet 2, Antenna 2', 'Packet 2, Antenna 3')
     grid on
     hold off
     return

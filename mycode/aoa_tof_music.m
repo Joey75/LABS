@@ -52,7 +52,7 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music(x, ...
             PP = steering_vector' * (eigenvectors * eigenvectors') * steering_vector;
             Pmusic(ii, jj) = abs(1 /  PP);
             Pmusic(ii, jj) = 10 * log10(Pmusic(ii, jj));% / max(Pmusic(:, jj))); 
-            Pmusic(ii, jj) = abs(Pmusic(ii, jj));
+            %Pmusic(ii, jj) = abs(Pmusic(ii, jj));
         end
     end
 

@@ -45,3 +45,12 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+mycode/data/0522_log_close_rxWithAntCable_lasting10min
+*.dat--1m-neg-20-degrees--laptop-2--test-10
+mycode/data/lgtm-monitor.dat--2m-10-degrees--laptop-1--test-1
+mycode/data/lgtm-monitor.dat--3m-10-degrees--laptop-2--test-10
+*.dat--2m-90-degrees--laptop-1--test-2
+mycode/data/lgtm-monitor.dat--2m-20-degrees--laptop-1--test-1
+*.dat--2m-neg-20-degrees--laptop-2--test-10
+mycode/data/lgtm-monitor.dat--2m-neg-10-degrees--laptop-1--test-1
+*.dat--3m-20-degrees--laptop-1--test-1

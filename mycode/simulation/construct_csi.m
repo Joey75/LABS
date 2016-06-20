@@ -11,5 +11,6 @@ function csi=construct_csi(aoa,tof)
         end
     end
     noise=(randn(3,30)+j*randn(3,30))/sqrt(2); 
-    csi=a*x+noise;
+    amp=sqrt(cov(noise(1,:))*10^(100/10));
+    csi=amp*a*x+noise;
 end

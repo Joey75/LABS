@@ -21,9 +21,9 @@ function [aoa_packet_data, tof_packet_data] = run_music(csi_trace, frequency, su
 
     % Sanitize ToFs with Algorithm 1
     packet_one_phase_matrix = unwrap(angle(csi), pi, 2);
-    sanitized_csi = spotfi_algorithm_1(csi, sub_freq_delta);
+    %sanitized_csi = spotfi_algorithm_1(csi, sub_freq_delta);
     % Acquire smoothed CSI matrix
-    smoothed_sanitized_csi = smooth_csi(sanitized_csi);
+    smoothed_sanitized_csi = smooth_csi(csi);
     % Run SpotFi's AoA-ToF MUSIC algorithm on the smoothed and sanitized CSI matrix
     [aoa_packet_data{1}, tof_packet_data{1}] = aoa_tof_music(...
             smoothed_sanitized_csi, antenna_distance, frequency, sub_freq_delta, data_name);
@@ -39,10 +39,10 @@ function [aoa_packet_data, tof_packet_data] = run_music(csi_trace, frequency, su
         csi = squeeze(csi);
 
         % Sanitize ToFs with Algorithm 1
-        sanitized_csi = spotfi_algorithm_1(csi, sub_freq_delta, packet_one_phase_matrix);
+        %sanitized_csi = spotfi_algorithm_1(csi, sub_freq_delta, packet_one_phase_matrix);
 
         % Acquire smoothed CSI matrix
-        smoothed_sanitized_csi = smooth_csi(sanitized_csi);
+        smoothed_sanitized_csi = smooth_csi(csi);
         % Run SpotFi's AoA-ToF MUSIC algorithm on the smoothed and sanitized CSI matrix
         [aoa_packet_data{packet_index}, tof_packet_data{packet_index}] = aoa_tof_music(...
                 smoothed_sanitized_csi, antenna_distance, frequency, sub_freq_delta, data_name);

@@ -1,9 +1,9 @@
 function output_top_aoas = run_spotfi(filepath)
-	antenna_distance = 0.1;
+	antenna_distance = 0.055;
     % frequency = 5 * 10^9;
     % frequency = 5.785 * 10^9;
     frequency = 5.32 * 10^9;
-    sub_freq_delta = (40 * 10^6) / 30;
+    sub_freq_delta = (40 * 10^6) / 128*4;
     %sub_freq_delta = 40 * 10^6;
 	
 	csi_trace=readfile(filepath);

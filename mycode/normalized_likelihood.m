@@ -128,16 +128,17 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
     %% TODO: Tuning parameters using SVM results
     % Good base: 5, 10000, 75000, 0 (in order)
     % Likelihood parameters
+    weight_num_cluster_points = 0.0;
+    weight_aoa_variance = -0.0010;
+    weight_tof_variance = -0.0079;
+    weight_tof_mean = -0.0003;
+    constant_offset = -0.9997;
+    %{
     weight_num_cluster_points = 0.0001 * 10^-3;
     weight_aoa_variance = -0.7498 * 10^-3;
     weight_tof_variance = 0.0441 * 10^-3;
     weight_tof_mean = -0.0474 * 10^-3;
     constant_offset = -1;
-    %{
-    weight_num_cluster_points = 5;
-    weight_aoa_variance = 50000; % prev = 10000; prev = 100000;
-    weight_tof_variance = 100000;
-    weight_tof_mean = 1000; % prev = 50; % prev = 10;
     %}
     %constant_offset = 300;
     % Compute likelihoods

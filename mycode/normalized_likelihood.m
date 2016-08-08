@@ -129,11 +129,19 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
     % Good base: 5, 10000, 75000, 0 (in order)
     % Likelihood parameters
     weight_num_cluster_points = 0.0;
+    weight_aoa_variance = 0.0004;
+    weight_tof_variance = -0.0016;
+    weight_tof_mean = -0.0000;
+    constant_offset = -1;
+    %{
+    weight_num_cluster_points = 0.0;
     weight_aoa_variance = -0.0010;
     weight_tof_variance = -0.0079;
     weight_tof_mean = -0.0003;
     constant_offset = -0.9997;
+    %}
     %{
+    % Old Likelihood parameters
     weight_num_cluster_points = 0.0001 * 10^-3;
     weight_aoa_variance = -0.7498 * 10^-3;
     weight_tof_variance = 0.0441 * 10^-3;
@@ -331,6 +339,17 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
 	fprintf('The Estimated Angle of Arrival for data set %s is %f\n', ...
 			data_name, max_likelihood_average_aoa)
     % Profit
+    top_likelihood_indices
+    ii = size(top_likelihood_indices, 1);
+    while ii > 0
+        if top_likelihood_indices(ii, 1) == -1
+            top_likelihood_indices(ii, :) = [];
+            ii = ii - 1;
+        else
+            break;
+        end
+    end
+    top_likelihood_indices
     output_top_aoas = cluster_aoa(top_likelihood_indices);
 end
 

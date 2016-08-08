@@ -76,7 +76,7 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music_new(x, ...
 
   binary_peaks_pmusic = imregionalmax(Pmusic);
   
-      % Get AoAs that have peaks
+    % Get AoAs that have peaks
     % fprintf('Future estimated aoas\n')
     aoa_indices = linspace(1, size(binary_peaks_pmusic, 1), size(binary_peaks_pmusic, 1));
     aoa_peaks_binary_vector = any(binary_peaks_pmusic, 2);
@@ -106,15 +106,6 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music_new(x, ...
     zlabel('Spectrum Peaks')
     title('AoA and ToF Estimation from Modified MUSIC Algorithm')
     grid on
-    
-    
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %% TODO: DELETE AFTER TEST VERIFICATION
-    
-    % Find AoA peaks
-    [~, old_aoa_peak_indices] = findpeaks(Pmusic(:, 1));
-    old_estimated_aoas = theta(old_aoa_peak_indices);
-    %}
 
     % Theta (AoA) & Tau (ToF) 3D Plot
     figure('Name', 'Selective AoA & ToF MUSIC Peaks, with only peaked AoAs', 'NumberTitle', 'off')
@@ -137,25 +128,6 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music_new(x, ...
 %        grid on
 %    end
     
-    %% TODO: Delete after testing
-    
-    % Find ToF peaks
-    old_time_peak_indices = zeros(length(old_aoa_peak_indices), length(tau));
-    % AoA loop (only looping over peaks in AoA found above)
-    for ii = 1:length(old_aoa_peak_indices)
-        old_aoa_index = old_aoa_peak_indices(ii);
-        % For each AoA, find ToF peaks
-        [old_peak_values, old_tof_peak_indices] = findpeaks(Pmusic(old_aoa_index, :));
-        if isempty(old_tof_peak_indices)
-            old_tof_peak_indices = 1;
-        end
-        % Pad result with -1 so we don't have a jagged matrix (and so we can do < 0 testing)
-        old_negative_ones_for_padding = -1 * ones(1, length(tau) - length(old_tof_peak_indices));
-        old_time_peak_indices(ii, :) = horzcat(tau(old_tof_peak_indices), old_negative_ones_for_padding);
-    end
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %}
-
     % Set return values
     % AoA is now a column vector
     estimated_aoas = transpose(estimated_aoas);

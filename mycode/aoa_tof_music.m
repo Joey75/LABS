@@ -37,7 +37,7 @@ function [estimated_aoas, estimated_tofs] = aoa_tof_music(x, ...
     % Peak search
     % Angle in degrees (converts to radians in phase calculations)
     %% TODO: Tuning theta too??
-    theta = 0:1:90; 
+    theta = -90:1:90; 
     % time in milliseconds
     %% TODO: Tuning tau....
     %tau = 0:(1.0 * 10^-9):(50 * 10^-9);

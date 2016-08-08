@@ -339,7 +339,8 @@ function [output_top_aoas] = normalized_likelihood(tof_packet_data, aoa_packet_d
 	fprintf('The Estimated Angle of Arrival for data set %s is %f\n', ...
 			data_name, max_likelihood_average_aoa)
     % Profit
-    top_likelihood_indices
+    
+    % Trim remaining -1 indices from the end
     ii = size(top_likelihood_indices, 1);
     while ii > 0
         if top_likelihood_indices(ii, 1) == -1
